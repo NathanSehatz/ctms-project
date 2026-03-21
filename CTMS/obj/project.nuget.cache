@@ -1,8 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "idqsr/92oA0=",
+  "dgSpecHash": "YuARH8yMxv0=",
   "success": true,
   "projectFilePath": "/Users/nathan/George Brown College/Y2 S2/comp2154/CTMS/CTMS/CTMS.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/nathan/.nuget/packages/microsoft.entityframeworkcore/9.0.14/microsoft.entityframeworkcore.9.0.14.nupkg.sha512",
+    "/Users/nathan/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.14/microsoft.entityframeworkcore.abstractions.9.0.14.nupkg.sha512",
+    "/Users/nathan/.nuget/packages/microsoft.entityframeworkcore.analyzers/9.0.14/microsoft.entityframeworkcore.analyzers.9.0.14.nupkg.sha512",
+    "/Users/nathan/.nuget/packages/microsoft.entityframeworkcore.inmemory/9.0.14/microsoft.entityframeworkcore.inmemory.9.0.14.nupkg.sha512",
+    "/Users/nathan/.nuget/packages/microsoft.extensions.caching.abstractions/9.0.14/microsoft.extensions.caching.abstractions.9.0.14.nupkg.sha512",
+    "/Users/nathan/.nuget/packages/microsoft.extensions.caching.memory/9.0.14/microsoft.extensions.caching.memory.9.0.14.nupkg.sha512",
+    "/Users/nathan/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.14/microsoft.extensions.dependencyinjection.9.0.14.nupkg.sha512",
+    "/Users/nathan/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.14/microsoft.extensions.dependencyinjection.abstractions.9.0.14.nupkg.sha512",
+    "/Users/nathan/.nuget/packages/microsoft.extensions.logging/9.0.14/microsoft.extensions.logging.9.0.14.nupkg.sha512",
+    "/Users/nathan/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.14/microsoft.extensions.logging.abstractions.9.0.14.nupkg.sha512",
+    "/Users/nathan/.nuget/packages/microsoft.extensions.options/9.0.14/microsoft.extensions.options.9.0.14.nupkg.sha512",
+    "/Users/nathan/.nuget/packages/microsoft.extensions.primitives/9.0.14/microsoft.extensions.primitives.9.0.14.nupkg.sha512"
+  ],
   "logs": []
 }
