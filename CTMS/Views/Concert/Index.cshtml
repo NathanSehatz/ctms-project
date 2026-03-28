@@ -1,0 +1,32 @@
+@model IEnumerable<CTMS.Models.Concert>
+
+<h2>Concerts</h2>
+
+<p>
+    <a asp-action="Create">Add New Concert</a>
+</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Location</th>
+        <th>Date</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Location</td>
+            <td>@item.Date</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
