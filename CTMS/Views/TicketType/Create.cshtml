@@ -1,0 +1,25 @@
+@model CTMS.Models.TicketType
+
+<h2>Create Ticket Type for @ViewBag.ConcertTitle</h2>
+
+<form asp-action="Create" method="post">
+    <input type="hidden" asp-for="ConcertId" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="QuantityAvailable" class="form-label"></label>
+        <input asp-for="QuantityAvailable" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" asp-route-concertId="@ViewBag.ConcertId" class="btn btn-secondary">Back</a>
+</form>

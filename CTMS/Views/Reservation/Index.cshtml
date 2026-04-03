@@ -1,0 +1,23 @@
+@model IEnumerable<CTMS.Models.Reservation>
+
+<h2>Reservations</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Concert</th>
+        <th>Ticket Type</th>
+        <th>Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var r in Model)
+    {
+        <tr>
+            <td>@r.TicketType?.Concert?.Title</td>
+            <td>@r.TicketType?.Name</td>
+            <td>@r.Quantity</td>
+        </tr>
+    }
+    </tbody>
+</table>

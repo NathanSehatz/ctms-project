@@ -7,4 +7,6 @@ public class Reservation
 
     public int UserId { get; set; }
     public int TicketTypeId { get; set; }
+
+    public TicketType? TicketType { get; set; }
 }
