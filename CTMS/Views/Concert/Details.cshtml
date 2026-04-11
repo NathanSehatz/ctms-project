@@ -1,0 +1,68 @@
+@model CTMS.Models.Concert
+
+<h2>@Model.Title</h2>
+
+<p><strong>Location:</strong> @Model.Location</p>
+<p><strong>Date:</strong> @Model.Date.ToString("yyyy-MM-dd")</p>
+
+<hr />
+
+<h3>Ticket Types</h3>
+
+@if (Model.TicketTypes != null && Model.TicketTypes.Any())
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Available</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var ticket in Model.TicketTypes)
+        {
+            <tr>
+                <td>@ticket.Name</td>
+                <td>$@ticket.Price.ToString("0.00")</td>
+                <td>
+                    @if (ticket.QuantityAvailable > 0)
+                    {
+                        <span>@ticket.QuantityAvailable</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">Sold Out</span>
+                    }
+                </td>
+                <td>
+                    @if (User.Identity != null && User.Identity.IsAuthenticated && ticket.QuantityAvailable > 0)
+                    {
+                        <a asp-controller="Reservation"
+                           asp-action="Create"
+                           asp-route-ticketTypeId="@ticket.Id"
+                           class="btn btn-primary">
+                            Reserve
+                        </a>
+                    }
+                    else if (ticket.QuantityAvailable <= 0)
+                    {
+                        <span class="text-danger">Sold Out</span>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Login to reserve</span>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No ticket types available for this concert.</p>
+}
+
+<a asp-action="Index" class="btn btn-secondary">Back</a>

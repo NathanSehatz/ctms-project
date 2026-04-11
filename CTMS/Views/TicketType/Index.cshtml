@@ -1,34 +1,91 @@
 @model IEnumerable<CTMS.Models.TicketType>
 
-<h2>Ticket Types for @ViewBag.ConcertTitle</h2>
+@{
+    ViewData["Title"] = "Ticket Types";
+    var canManage = User.IsInRole("Admin") || User.IsInRole("Organizer");
+}
 
-<p>
-    <a asp-action="Create" asp-route-concertId="@ViewBag.ConcertId" class="btn btn-primary">Add Ticket Type</a>
-    <a asp-controller="Concert" asp-action="Index" class="btn btn-secondary">Back to Concerts</a>
-</p>
+<div class="page-header">
+    <h2>Ticket Types for @ViewBag.ConcertTitle</h2>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity Available</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Name</td>
-            <td>@item.Price</td>
-            <td>@item.QuantityAvailable</td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
-                <a asp-controller="Reservation" asp-action="Create" asp-route-ticketTypeId="@item.Id" class="btn btn-success btn-sm">Reserve</a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+    <div class="d-flex gap-2 flex-wrap">
+        @if (canManage)
+        {
+            <a asp-action="Create" asp-route-concertId="@ViewBag.ConcertId" class="btn btn-primary">
+                Add Ticket Type
+            </a>
+        }
+
+        <a asp-controller="Concert" asp-action="Index" class="btn btn-secondary">
+            Back to Concerts
+        </a>
+    </div>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity Available</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>$@item.Price.ToString("0.00")</td>
+                    <td>
+                        @if (item.QuantityAvailable > 0)
+                        {
+                            <span>@item.QuantityAvailable</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger">Sold Out</span>
+                        }
+                    </td>
+                    <td class="action-links">
+                        @if (canManage)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        }
+
+                        @if (item.QuantityAvailable > 0)
+                        {
+                            <a asp-controller="Reservation"
+                               asp-action="Create"
+                               asp-route-ticketTypeId="@item.Id">
+                                Reserve
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Unavailable</span>
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="empty-state">
+        <p class="mb-3">No ticket types have been added for this concert.</p>
+
+        @if (canManage)
+        {
+            <a asp-action="Create" asp-route-concertId="@ViewBag.ConcertId" class="btn btn-primary">
+                Add First Ticket Type
+            </a>
+        }
+    </div>
+}

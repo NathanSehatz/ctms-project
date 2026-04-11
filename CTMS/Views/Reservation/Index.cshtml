@@ -1,23 +1,40 @@
 @model IEnumerable<CTMS.Models.Reservation>
 
-<h2>Reservations</h2>
+@{
+    ViewData["Title"] = "Reservations";
+}
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>Concert</th>
-        <th>Ticket Type</th>
-        <th>Quantity</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var r in Model)
-    {
-        <tr>
-            <td>@r.TicketType?.Concert?.Title</td>
-            <td>@r.TicketType?.Name</td>
-            <td>@r.Quantity</td>
-        </tr>
-    }
-    </tbody>
-</table>
+<div class="page-header">
+    <h2>Reservations</h2>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+            <tr>
+                <th>Concert</th>
+                <th>Ticket Type</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.TicketType?.Concert?.Title</td>
+                    <td>@r.TicketType?.Name</td>
+                    <td>@r.Quantity</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="empty-state">
+        <p class="mb-0">No reservations have been made yet.</p>
+    </div>
+}

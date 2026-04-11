@@ -1,0 +1,37 @@
+@model List<CTMS.Models.Concert>
+
+<h2>Ticket Availability Report</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Concert</th>
+        <th>Ticket Type</th>
+        <th>Available</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var concert in Model)
+    {
+        foreach (var ticket in concert.TicketTypes)
+        {
+            <tr>
+                <td>@concert.Title</td>
+                <td>@ticket.Name</td>
+                <td>@ticket.QuantityAvailable</td>
+                <td>
+                    @if (ticket.QuantityAvailable > 0)
+                    {
+                        <span class="text-success">Available</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">Sold Out</span>
+                    }
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

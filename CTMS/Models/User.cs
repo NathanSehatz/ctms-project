@@ -1,9 +1,18 @@
 namespace CTMS.Models;
 
+using System.ComponentModel.DataAnnotations;
+
 public class User
 {
     public int Id { get; set; }
-    public string Email { get; set; }
-    public string PasswordHash { get; set; }
-    public string Role { get; set; } // Admin, Organizer, User
+
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; } = string.Empty;
+
+    [Required]
+    public string PasswordHash { get; set; } = string.Empty;
+
+    [Required]
+    public string Role { get; set; } = "User"; // Admin, Organizer, User
 }

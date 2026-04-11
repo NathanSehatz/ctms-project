@@ -1,33 +1,62 @@
 @model IEnumerable<CTMS.Models.Concert>
 
-<h2>Concerts</h2>
+@{
+    ViewData["Title"] = "Concerts";
+    var canManage = User.IsInRole("Admin") || User.IsInRole("Organizer");
+}
 
-<p>
-    <a asp-action="Create">Add New Concert</a>
-</p>
+<div class="page-header">
+    <h2>Concerts</h2>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Location</th>
-        <th>Date</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
+    @if (canManage)
     {
-        <tr>
-            <td>@item.Title</td>
-            <td>@item.Location</td>
-            <td>@item.Date</td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                <a asp-controller="TicketType" asp-action="Index" asp-route-concertId="@item.Id">Tickets</a>
-            </td>
-        </tr>
+        <a asp-action="Create" class="btn btn-primary">Add New Concert</a>
     }
-    </tbody>
-</table>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Location</td>
+                    <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                    <td class="action-links">
+                        @if (canManage)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <a asp-controller="TicketType" asp-action="Index" asp-route-concertId="@item.Id">Tickets</a>
+                        }
+
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="empty-state">
+        <p class="mb-3">No concerts have been added yet.</p>
+
+        @if (canManage)
+        {
+            <a asp-action="Create" class="btn btn-primary">Create Your First Concert</a>
+        }
+    </div>
+}

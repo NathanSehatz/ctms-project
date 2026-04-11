@@ -1,26 +1,46 @@
 @model CTMS.Models.Concert
 
-<h2>Edit Concert</h2>
+@{
+    ViewData["Title"] = "Edit Concert";
+}
 
-<form asp-action="Edit">
-    <input type="hidden" asp-for="Id" />
-
-    <div>
-        <label>Title</label>
-        <input asp-for="Title" />
+<div class="form-page">
+    <div class="page-header">
+        <h2>Edit Concert</h2>
     </div>
 
-    <div>
-        <label>Location</label>
-        <input asp-for="Location" />
+    <div class="card p-4">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Location" class="form-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Date" class="form-label"></label>
+                <input asp-for="Date" class="form-control" type="datetime-local" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-2 flex-wrap">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
     </div>
+</div>
 
-    <div>
-        <label>Date</label>
-        <input asp-for="Date" />
-    </div>
-
-    <button type="submit">Save</button>
-</form>
-
-<a asp-action="Index">Back</a>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

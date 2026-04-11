@@ -1,8 +1,58 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mb-5">
+    <h1 class="display-5 fw-bold">Concert Ticket Management System</h1>
+    <p class="text-muted">Manage concerts, ticket types, and reservations all in one place.</p>
+</div>
+
+<div class="row g-4">
+
+    <!-- Concerts Card -->
+    <div class="col-md-4">
+        <div class="card h-100 p-4 text-center">
+            <h3 class="mb-3">Concerts</h3>
+            <p class="text-muted">
+                Create, edit, and manage all concert events.
+            </p>
+            <a asp-controller="Concert" asp-action="Index" class="btn btn-primary mt-auto">
+                View Concerts
+            </a>
+        </div>
+    </div>
+
+    <!-- Reservations Card -->
+    <div class="col-md-4">
+        <div class="card h-100 p-4 text-center">
+            <h3 class="mb-3">Reservations</h3>
+            <p class="text-muted">
+                Manage ticket bookings and track reservations.
+            </p>
+            <a asp-controller="Reservation" asp-action="Index" class="btn btn-primary mt-auto">
+                View Reservations
+            </a>
+        </div>
+    </div>
+
+    <!-- Ticket Types Card -->
+    <div class="col-md-4">
+        <div class="card h-100 p-4 text-center">
+            <h3 class="mb-3">Ticket Types</h3>
+            <p class="text-muted">
+                Configure ticket categories and pricing for concerts.
+            </p>
+            <a asp-controller="Concert" asp-action="Index" class="btn btn-primary mt-auto">
+                Manage Tickets
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<!-- Optional Summary Section -->
+<div class="mt-5 text-center">
+    <p class="text-muted">
+        Use the navigation above or the quick actions to manage your system efficiently.
+    </p>
 </div>
